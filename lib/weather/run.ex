@@ -1,11 +1,13 @@
 defmodule Weather.Run do
-  import Weather.Client
+  import Weather.Client, only: [ get_weather_data: 1 ]
+  import Weather.Parser, only: [ parse_weather_data: 1 ]
 
   def main(argv) do
     OptionParser.parse(argv, switches: [help: :boolean], aliases: [h: :help])
     |> parse_args
     |> get_weather_data
-    |> IO.puts
+    |> parse_weather_data
+    |> (&(IO.puts "todays temp is #{&1}")).()
     IO.puts "finished, thaks"
   end
 

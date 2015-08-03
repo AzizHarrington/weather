@@ -1,7 +1,7 @@
 defmodule Weather.Client do
   def get_weather_data(code) do
     make_url(code)
-    |> HTTPoison.get
+    |> HTTPoison.get!
     |> handle_response
   end
 
