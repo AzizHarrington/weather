@@ -5,6 +5,7 @@ defmodule Weather.Mixfile do
     [app: :weather,
      version: "0.0.1",
      elixir: "~> 1.0",
+     escript: escript,
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
      deps: deps]
@@ -14,7 +15,7 @@ defmodule Weather.Mixfile do
   #
   # Type `mix help compile.app` for more information
   def application do
-    [applications: [:logger]]
+    [applications: [:logger, :httpoison]]
   end
 
   # Dependencies can be Hex packages:
@@ -27,6 +28,12 @@ defmodule Weather.Mixfile do
   #
   # Type `mix help deps` for more examples and options
   defp deps do
-    []
+    [
+      { :httpoison, "~> 0.4" }
+    ]
+  end
+
+  defp escript do
+    [main_module: Weather.Run]
   end
 end
